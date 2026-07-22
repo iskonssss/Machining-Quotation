@@ -39,9 +39,19 @@ function loadPersisted(): AppState {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (raw) {
       const parsed = JSON.parse(raw) as AppState
-      // Merge with defaults so new seed fields survive schema evolution.
+      // Merge with defaults so new seed fields survive schema evolution, and
+      // append any newly-seeded machines/materials/templates the stored state
+      // doesn't know about yet (user edits to existing entries are kept).
       const base = initialState()
-      return { ...base, ...parsed, settings: { ...base.settings, ...parsed.settings } }
+      const merged = { ...base, ...parsed, settings: { ...base.settings, ...parsed.settings } }
+      for (const key of ['machines', 'materials', 'templates'] as const) {
+        const stored = parsed[key] as { id: string }[] | undefined
+        if (stored) {
+          const known = new Set(stored.map((e) => e.id))
+          merged[key] = [...stored, ...base[key].filter((e) => !known.has(e.id))] as never
+        }
+      }
+      return merged
     }
   } catch {
     /* corrupted storage — start fresh */

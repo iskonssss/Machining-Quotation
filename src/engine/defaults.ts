@@ -32,6 +32,8 @@ export const defaultMaterials: Material[] = [
   { id: 'mat-ss316', name: 'Stainless 316', density: 8.0, pricePerKg: 7.2, markupPct: 20 },
   { id: 'mat-brass', name: 'Brass CW614N', density: 8.5, pricePerKg: 8.8, markupPct: 20 },
   { id: 'mat-pom', name: 'POM / Delrin', density: 1.41, pricePerKg: 4.5, markupPct: 30 },
+  { id: 'mat-acrylic-clear', name: 'Acrylic (Clear)', density: 1.19, pricePerKg: 4.8, markupPct: 30 },
+  { id: 'mat-acrylic-col', name: 'Acrylic (Coloured)', density: 1.19, pricePerKg: 5.8, markupPct: 30 },
 ]
 
 export const defaultTemplates: OperationTemplate[] = [
