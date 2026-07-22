@@ -20,6 +20,9 @@ export const defaultMachines: Machine[] = [
   { id: 'm-brake', name: 'Press Brake', kind: 'bending', hourlyRate: 50, setupRate: 45 },
   { id: 'm-pipe', name: 'Pipe Bender', kind: 'pipe-bending', hourlyRate: 50, setupRate: 45 },
   { id: 'm-saw', name: 'Bandsaw / Cutting', kind: 'cutting', hourlyRate: 35, setupRate: 30 },
+  { id: 'm-co2', name: 'CO₂ Laser', kind: 'cutting', hourlyRate: 60, setupRate: 45 },
+  { id: 'm-fibre', name: 'Fibre Laser', kind: 'cutting', hourlyRate: 85, setupRate: 55 },
+  { id: 'm-waterjet', name: 'Water Jet', kind: 'cutting', hourlyRate: 95, setupRate: 60 },
   { id: 'm-bench', name: 'Bench / Assembly', kind: 'assembly', hourlyRate: 40, setupRate: 40 },
 ]
 
@@ -51,7 +54,10 @@ export const defaultTemplates: OperationTemplate[] = [
   { id: 'op-weld-tack', name: 'Tack & Fit-up', kind: 'welding', basis: 'per-part-min', defaultSetupMin: 10, defaultRunValue: 12 },
   { id: 'op-bend', name: 'Press Brake Bend', kind: 'bending', basis: 'per-bend', defaultSetupMin: 20, defaultRunValue: 1.5 },
   { id: 'op-pipebend', name: 'Pipe / Tube Bend', kind: 'pipe-bending', basis: 'per-bend', defaultSetupMin: 25, defaultRunValue: 3 },
-  { id: 'op-cut', name: 'Saw Cutting to Length', kind: 'cutting', basis: 'per-part-min', defaultSetupMin: 5, defaultRunValue: 3 },
+  { id: 'op-cut', name: 'Saw Cutting to Length', kind: 'cutting', basis: 'per-part-min', defaultSetupMin: 5, defaultRunValue: 3, preferredMachineId: 'm-saw' },
+  { id: 'op-laser-co2', name: 'CO₂ Laser Cutting', kind: 'cutting', basis: 'per-cut-m', defaultSetupMin: 10, defaultRunValue: 1, preferredMachineId: 'm-co2' },
+  { id: 'op-laser-fibre', name: 'Fibre Laser Cutting', kind: 'cutting', basis: 'per-cut-m', defaultSetupMin: 10, defaultRunValue: 0.6, preferredMachineId: 'm-fibre' },
+  { id: 'op-waterjet', name: 'Water Jet Cutting', kind: 'cutting', basis: 'per-cut-m', defaultSetupMin: 15, defaultRunValue: 3, preferredMachineId: 'm-waterjet' },
   { id: 'op-finish', name: 'Manual Finishing', kind: 'finishing', basis: 'per-part-min', defaultSetupMin: 0, defaultRunValue: 5 },
   { id: 'op-assy', name: 'Assembly', kind: 'assembly', basis: 'per-part-min', defaultSetupMin: 10, defaultRunValue: 10 },
   { id: 'op-inspect', name: 'Inspection / QC', kind: 'assembly', basis: 'per-part-min', defaultSetupMin: 5, defaultRunValue: 4 },
@@ -60,6 +66,11 @@ export const defaultTemplates: OperationTemplate[] = [
 /** Pick the first machine matching an operation kind. */
 export function machineForKind(machines: Machine[], kind: string): Machine {
   return machines.find((m) => m.kind === kind) ?? machines[0]
+}
+
+/** Resolve a template's machine: its pinned machine if set, else by kind. */
+export function machineForTemplate(machines: Machine[], t: OperationTemplate): Machine {
+  return machines.find((m) => m.id === t.preferredMachineId) ?? machineForKind(machines, t.kind)
 }
 
 export function initialState(): AppState {

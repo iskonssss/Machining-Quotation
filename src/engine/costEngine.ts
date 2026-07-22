@@ -65,6 +65,7 @@ function runMinutesPerPart(op: Operation): number {
     case 'per-hole':
     case 'per-bend':
     case 'per-weld-m':
+    case 'per-cut-m':
       return op.runValue * op.quantityFactor
     case 'flat-min':
       return 0 // handled as batch-level flat time

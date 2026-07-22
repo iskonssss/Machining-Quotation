@@ -1,5 +1,5 @@
 import type { DrawingExtraction, Operation, Part } from '../types'
-import { machineForKind } from './defaults'
+import { machineForTemplate } from './defaults'
 import type { AppState } from '../types'
 
 // ── Drawing extraction (STUB) ───────────────────────────────────────────────
@@ -96,7 +96,7 @@ export function extractionToPart(ex: DrawingExtraction, state: AppState): Part {
 
   const operations: Operation[] = ex.suggestedOps.map((s) => {
     const t = state.templates.find((tp) => tp.id === s.templateId) ?? state.templates[0]
-    const machine = machineForKind(state.machines, t.kind)
+    const machine = machineForTemplate(state.machines, t)
     return {
       id: uid('op'),
       templateId: t.id,

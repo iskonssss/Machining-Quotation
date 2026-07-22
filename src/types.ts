@@ -35,6 +35,7 @@ export type OpBasis =
   | 'per-hole' // minutes per hole × count
   | 'per-bend' // minutes per bend × count
   | 'per-weld-m' // minutes per metre of weld × metres
+  | 'per-cut-m' // minutes per metre of cut path × metres
   | 'flat-min' // one-off minutes for the batch
 
 export interface OperationTemplate {
@@ -44,6 +45,8 @@ export interface OperationTemplate {
   basis: OpBasis
   defaultSetupMin: number
   defaultRunValue: number // minutes per unit of `basis`
+  /** pin a specific machine (e.g. fibre laser vs bandsaw share kind 'cutting') */
+  preferredMachineId?: string
 }
 
 export interface Operation {

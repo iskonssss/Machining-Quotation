@@ -3,7 +3,7 @@ import type { ChangeEvent } from 'react'
 import type { Operation, Part, Quote, QuoteStatus } from '../types'
 import { costPart, costQuote, fmtHours, fmtMoney } from '../engine/costEngine'
 import { extractFromDrawing, extractionToPart, uid } from '../engine/extraction'
-import { machineForKind } from '../engine/defaults'
+import { machineForTemplate } from '../engine/defaults'
 import { newBlankPart, useStore } from '../store'
 
 const BASIS_LABEL: Record<Operation['basis'], string> = {
@@ -11,6 +11,7 @@ const BASIS_LABEL: Record<Operation['basis'], string> = {
   'per-hole': 'min / hole',
   'per-bend': 'min / bend',
   'per-weld-m': 'min / metre',
+  'per-cut-m': 'min / metre',
   'flat-min': 'min flat',
 }
 
@@ -19,6 +20,7 @@ const FACTOR_LABEL: Record<Operation['basis'], string> = {
   'per-hole': 'holes',
   'per-bend': 'bends',
   'per-weld-m': 'metres',
+  'per-cut-m': 'metres',
   'flat-min': '—',
 }
 
@@ -254,7 +256,7 @@ function PartEditor({
   function addOperation(templateId: string) {
     const t = state.templates.find((tp) => tp.id === templateId)
     if (!t) return
-    const machine = machineForKind(state.machines, t.kind)
+    const machine = machineForTemplate(state.machines, t)
     set({
       operations: [
         ...part.operations,
