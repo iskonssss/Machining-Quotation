@@ -381,7 +381,7 @@ function PartEditor({
         </span>
       </div>
 
-      <div style={{ marginTop: 18, overflowX: 'auto' }}>
+      <div className="table-scroll" style={{ marginTop: 18, overflowX: 'auto' }}>
         <table className="table">
           <thead>
             <tr>

@@ -73,6 +73,7 @@ export function Settings() {
             <h3>Machines &amp; Hourly Rates</h3>
             <span className="hint">{s.currency}/hour including operator</span>
           </div>
+          <div className="table-scroll">
           <table className="table">
             <thead>
               <tr>
@@ -107,6 +108,7 @@ export function Settings() {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       </div>
 
@@ -116,6 +118,7 @@ export function Settings() {
             <h3>Materials</h3>
             <span className="hint">purchase price + markup</span>
           </div>
+          <div className="table-scroll">
           <table className="table">
             <thead>
               <tr>
@@ -156,6 +159,7 @@ export function Settings() {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       </div>
     </>

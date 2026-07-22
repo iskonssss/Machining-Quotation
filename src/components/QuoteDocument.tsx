@@ -41,6 +41,7 @@ export function QuoteDocument({ quoteId, onBack }: { quoteId: string; onBack: ()
         </div>
 
         <h2>Items</h2>
+        <div className="table-scroll">
         <table className="table">
           <thead>
             <tr>
@@ -74,6 +75,7 @@ export function QuoteDocument({ quoteId, onBack }: { quoteId: string; onBack: ()
             </tr>
           </tbody>
         </table>
+        </div>
 
         {quote.notes && (
           <>

@@ -403,3 +403,68 @@ input, select, textarea { font: inherit; color: inherit; }
   .sidebar { width: 220px; min-width: 220px; }
   .form-row.cols-4 { grid-template-columns: 1fr 1fr; }
 }
+
+/* ── Phone layout: sidebar becomes an iOS-style bottom tab bar ── */
+@media (max-width: 700px) {
+  .app { flex-direction: column; }
+
+  .sidebar {
+    order: 2;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-width: 0;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+    border-right: none;
+    border-top: 1px solid var(--separator);
+    background: rgba(249, 249, 251, 0.92);
+    z-index: 40;
+  }
+  .sidebar h1, .sidebar-footer { display: none; }
+  .nav-item {
+    flex-direction: column;
+    gap: 3px;
+    padding: 6px 18px;
+    font-size: 11px;
+    font-weight: 600;
+    width: auto;
+    color: var(--label-2);
+  }
+  .nav-item.active { background: none; color: var(--blue); }
+  .nav-item .icon { width: 32px; height: 32px; font-size: 17px; box-shadow: none; background: transparent; }
+  .nav-item.active .icon { background: var(--blue-soft); }
+
+  .main { padding: 18px 14px calc(90px + env(safe-area-inset-bottom)); }
+
+  .large-title { font-size: 27px; }
+  .toolbar { gap: 8px; }
+  .toolbar .large-title { width: 100%; }
+  .card { padding: 14px; border-radius: 14px; }
+  .doc { padding: 22px 18px; }
+  .doc-head { flex-direction: column; gap: 10px; }
+  .doc-head .meta { text-align: left; }
+
+  .form-row.cols-2, .form-row.cols-3, .form-row.cols-4 { grid-template-columns: 1fr 1fr; }
+  .quote-grid { grid-template-columns: 1fr; }
+  .dropzone { padding: 18px 14px; font-size: 14px; }
+  .part-title-row input.part-name { min-width: 140px; }
+  .summary-panel { position: static; }
+
+  /* prevent iOS Safari from zooming into focused inputs */
+  .field input, .field select, .field textarea, .table td input, .table td select {
+    font-size: 16px;
+  }
+
+  /* wide tables scroll inside their card instead of stretching the page */
+  .table-scroll { overflow-x: auto; margin: 0 -14px; padding: 0 14px; }
+  .table { min-width: 640px; }
+  .doc .table { min-width: 480px; }
+
+  .segmented { flex-wrap: wrap; }
+  .btn { padding: 9px 14px; }
+}
