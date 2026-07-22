@@ -6,7 +6,7 @@ import type { AppState, Machine, Material, OperationTemplate, ShopSettings } fro
 
 export const defaultSettings: ShopSettings = {
   shopName: 'My Machine Shop',
-  currency: '€',
+  currency: 'S$',
   defaultMarginPct: 25,
   toleranceFactors: { standard: 1.0, fine: 1.25, 'very-fine': 1.6 },
   finishCosts: { none: 0, deburr: 1.5, anodize: 6, paint: 4, galvanize: 5 },

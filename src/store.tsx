@@ -44,6 +44,9 @@ function loadPersisted(): AppState {
       // doesn't know about yet (user edits to existing entries are kept).
       const base = initialState()
       const merged = { ...base, ...parsed, settings: { ...base.settings, ...parsed.settings } }
+      // One-off migration: '€' was the original seed placeholder, never a user
+      // choice — move those installs to the new S$ default.
+      if (merged.settings.currency === '€') merged.settings.currency = 'S$'
       for (const key of ['machines', 'materials', 'templates'] as const) {
         const stored = parsed[key] as { id: string }[] | undefined
         if (stored) {

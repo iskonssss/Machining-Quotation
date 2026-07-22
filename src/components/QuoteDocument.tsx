@@ -70,7 +70,7 @@ export function QuoteDocument({ quoteId, onBack }: { quoteId: string; onBack: ()
               )
             })}
             <tr className="doc-total-row">
-              <td colSpan={5}>Total (excl. VAT)</td>
+              <td colSpan={5}>Total (excl. GST)</td>
               <td className="num">{fmtMoney(cost.total, cur)}</td>
             </tr>
           </tbody>
@@ -85,7 +85,7 @@ export function QuoteDocument({ quoteId, onBack }: { quoteId: string; onBack: ()
         )}
 
         <div className="doc-footer">
-          Prices exclude VAT and shipping unless stated otherwise. Quotation valid 30 days.
+          Prices exclude GST and shipping unless stated otherwise. Quotation valid 30 days.
           Lead time to be confirmed on order. Material certificates available on request.
         </div>
       </div>
