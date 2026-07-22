@@ -222,10 +222,12 @@ input, select, textarea { font: inherit; color: inherit; }
 }
 .field textarea { resize: vertical; min-height: 70px; }
 
+/* auto-fit keeps every field at a readable width — columns wrap instead of
+   crushing their content when the card gets narrow */
 .form-row { display: grid; gap: 14px; }
-.form-row.cols-2 { grid-template-columns: 1fr 1fr; }
-.form-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
-.form-row.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+.form-row.cols-2 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.form-row.cols-3 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.form-row.cols-4 { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
 .form-row + .form-row { margin-top: 14px; }
 
 /* ── Segmented control ── */
@@ -273,6 +275,13 @@ input, select, textarea { font: inherit; color: inherit; }
   width: 100%;
   min-width: 60px;
 }
+.table td select { min-width: 150px; }
+.table td.op-name { min-width: 170px; }
+/* the operations table scrolls sideways inside its card instead of crushing
+   its columns — at every screen size */
+.table-scroll { overflow-x: auto; }
+.table-scroll .table { min-width: 760px; }
+.doc .table-scroll .table { min-width: 480px; }
 .table td input:focus, .table td select:focus { border-color: var(--blue); background: #fff; }
 .table .num { text-align: right; font-variant-numeric: tabular-nums; }
 .table td.op-name { font-weight: 600; }
