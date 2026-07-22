@@ -1,1 +1,0 @@
-{"root":["./src/App.tsx","./src/main.tsx","./src/store.tsx","./src/types.ts","./src/components/Dashboard.tsx","./src/components/QuoteDocument.tsx","./src/components/QuoteEditor.tsx","./src/components/Settings.tsx","./src/engine/costEngine.ts","./src/engine/defaults.ts","./src/engine/extraction.ts"],"version":"5.9.3"}
